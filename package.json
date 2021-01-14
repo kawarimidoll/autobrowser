@@ -1,0 +1,12 @@
+{
+  "name": "autobrowser",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kawarimidoll/autobrowser",
+  "author": "kawarimidoll <kawarimidoll+git@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.17.0",
+    "prettier": "^2.2.1"
+  }
+}
