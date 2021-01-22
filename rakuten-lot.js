@@ -1,12 +1,17 @@
 require("dotenv").config();
 const { chromium, devices } = require("playwright");
 
+const getJST = () => new Date().toLocaleString({ timeZone: "Asia/Tokyo" });
+
 if (!process.env.RAKUTEN_MAIL || !process.env.RAKUTEN_PASS) {
   console.error("env values are missing.");
   process.exit(1);
 }
 
 (async () => {
+  // https://nju33.com/javascript/%E6%97%A5%E6%9C%AC%E6%99%82%E9%96%93%E3%82%92%E5%8F%96%E5%BE%97
+  console.log("rakuten-lot begin: ", getJST());
+
   const browser = await chromium.launch();
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -85,4 +90,6 @@ if (!process.env.RAKUTEN_MAIL || !process.env.RAKUTEN_PASS) {
   }
 
   await browser.close();
+
+  console.log("rakuten-lot end: ", getJST());
 })();

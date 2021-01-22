@@ -1,12 +1,16 @@
 require("dotenv").config();
 const { chromium } = require("playwright");
 
+const getJST = () => new Date().toLocaleString({ timeZone: "Asia/Tokyo" });
+
 if (!process.env.RAKUTEN_MAIL || !process.env.RAKUTEN_PASS) {
   console.error("env values are missing.");
   process.exit(1);
 }
 
 (async () => {
+  console.log("rakuten-mall begin: ", getJST());
+
   const browser = await chromium.launch({ headless: false });
   // const browser = await chromium.launch();
   const context = await browser.newContext();
@@ -123,4 +127,6 @@ if (!process.env.RAKUTEN_MAIL || !process.env.RAKUTEN_PASS) {
     .catch((e) => console.warn(e));
 
   await browser.close();
+
+  console.log("rakuten-mall end: ", getJST());
 })();
