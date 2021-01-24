@@ -1,15 +1,9 @@
-require("dotenv").config();
 const { chromium } = require("playwright");
 
 const getJST = () => new Date().toLocaleString({ timeZone: "Asia/Tokyo" });
 
-if (!process.env.RAKUTEN_MAIL || !process.env.RAKUTEN_PASS) {
-  console.error("env values are missing.");
-  process.exit(1);
-}
-
-(async () => {
-  console.log("rakuten-mall begin: ", getJST());
+module.exports = async (mail, pass) => {
+  console.log("minigame begin: ", getJST());
 
   const browser = await chromium.launch({ headless: false });
   // const browser = await chromium.launch();
@@ -38,8 +32,8 @@ if (!process.env.RAKUTEN_MAIL || !process.env.RAKUTEN_PASS) {
         state: "attached",
         timeout: 5000,
       });
-      await page.fill("id=loginInner_u", process.env.RAKUTEN_MAIL);
-      await page.fill("id=loginInner_p", process.env.RAKUTEN_PASS);
+      await page.fill("id=loginInner_u", mail);
+      await page.fill("id=loginInner_p", pass);
       await page.click('input[type="submit"]');
     })
     .catch(() => console.log("already logged in"));
@@ -128,5 +122,5 @@ if (!process.env.RAKUTEN_MAIL || !process.env.RAKUTEN_PASS) {
 
   await browser.close();
 
-  console.log("rakuten-mall end: ", getJST());
-})();
+  console.log("minigame end: ", getJST());
+};
