@@ -11,13 +11,18 @@ if (!process.env.RAKUTEN_MAIL || !process.env.RAKUTEN_PASS) {
 }
 
 const playMall = async (func) => {
+  let finish = false;
   for (let i = 0; i < 10; i++) {
-    try {
-      await func(process.env.RAKUTEN_MAIL, process.env.RAKUTEN_PASS);
+    await func(process.env.RAKUTEN_MAIL, process.env.RAKUTEN_PASS)
+      .then(() => {
+        finish = true;
+      })
+      .catch((e) => {
+        console.warn(e);
+        console.warn("retry!");
+      });
+    if (finish) {
       return;
-    } catch (e) {
-      console.warn(e);
-      console.warn("retry!");
     }
   }
 
