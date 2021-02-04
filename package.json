@@ -6,11 +6,11 @@
   "author": "kawarimidoll <kawarimidoll+git@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^7.17.0",
+    "eslint": "^7.19.0",
     "prettier": "^2.2.1"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
-    "playwright": "^1.7.1"
+    "playwright": "^1.8.0"
   }
 }
